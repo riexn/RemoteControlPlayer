@@ -13,6 +13,7 @@ def getVideoDuration(nextLine):
 def convertPlaylistVideosToRawData(currentVideos):
     result = []
     for index, video in enumerate(currentVideos):
+        
         thisIterationIsDurationLine = "*duration2*" in video
         thisIterationIsPlayedLine = "*played*" in video
         thisIterationIsInvalidLine = "*invalid*" in video
@@ -25,8 +26,10 @@ def convertPlaylistVideosToRawData(currentVideos):
         x = {"file":videoPath, "duration":None}
         try:
             nextLine = currentVideos[index + 1]
+            nextNextLine = currentVideos[index + 2]
             nextLineIsPlayed = "*played*"  in nextLine
-            if nextLineIsPlayed:
+            nextNextLineIsInvalid = "*invalid*" in nextNextLine
+            if nextLineIsPlayed and nextNextLineIsInvalid:
                 continue
             nextLineHasDurationOfThisVideo = "*duration2*" in nextLine
             if nextLineHasDurationOfThisVideo:
@@ -35,6 +38,7 @@ def convertPlaylistVideosToRawData(currentVideos):
         except:
             result.append(x)
             return result
+    return result
 def convertFolderVideosToRawData(folderVideos, folderPath):
     result = []
     for video in folderVideos:
