@@ -1,2 +1,2 @@
 from core.startPlaylist import startPlaylist
-startPlaylist("E:\\MI Box\\ghuraba")
+startPlaylist("c:\\videos\\ghuraba")
